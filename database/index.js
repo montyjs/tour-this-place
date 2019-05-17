@@ -11,4 +11,20 @@ const database = knex({
   }
 });
 
+knex.schema.createTable('listings', table => {
+  table.increments('id');
+  table.string('type');
+  table.uuid('id').primary()
+})
+
+knex.schema.createTable('photos', table => {
+  table.increments('id');
+  table.string('room');
+  table.string('photoUrl');
+  table.uuid('id').primary()
+  table.foreign('listing_id')
+    .references('listings.id')
+})
+
+
 module.exports = database;

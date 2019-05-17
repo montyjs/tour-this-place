@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest-webpack",
+    "start": "nodemon server/issuesndex.js",
+    "react-dev": "webpack -d --watch",
     "seed": "node seed.js"
   },
   "repository": {

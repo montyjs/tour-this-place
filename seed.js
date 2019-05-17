@@ -11,19 +11,16 @@ let seedPhotos = [];
 
 for(let i=0; i<100; i++) {
 	let listing = {
-      id: i,
       type: types[Math.floor(Math.random()*(types.length-1))]
 	};
 	seedListings.push(listing);
-	for(let j=0; j<20; j++) {
-	  let photo = {
-	  	id: Number(listing.id.toString()+j),
-	  	photoUrl: faker.image.imageUrl(),
-	  	room: rooms[Math.floor(Math.random()*(rooms.length-1))],
-	  	listing_id: listing.id
-	  }
-	  seedPhotos.push(photo);
-	}
+	// for(let j=0; j<20; j++) {
+	//   let photo = {
+	//   	photoUrl: faker.image.imageUrl(),
+	//   	room: rooms[Math.floor(Math.random()*(rooms.length-1))],
+	//   }
+	//   seedPhotos.push(photo);
+	// }
 }
 for(let temp of seedListings){
 	console.log(temp);
