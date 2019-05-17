@@ -1,4 +1,5 @@
 const knex = require('knex');
+const faker = require('faker');
 
 const database = knex({
   client: 'pg',
@@ -26,13 +27,30 @@ database.schema.createTable('photos', table => {
     .references('listings.id')
 })
 
-const addListings = (listings) => {
+const addListings = (listings) => database('listings').insert(listings)
+
+const seed = (listings, rooms) => {
   database('listings')
-    .insert(listings);
+    .insert(listings)
+    .then(() => {
+      database('listings')
+        .pluck('id')
+        .then(ids => ids.map(id =>{
+          for(let i=0; i<20; i++){
+            let photo = {
+              photoUrl: faker.image.imageUrl(),
+              room: rooms[Math.floor(Math.random()*(rooms.length-1))],
+              listing_id: id
+            }
+            database('photos').insert(photo);
+          }
+        }))
+    })
 }
 
 
 module.exports = {
   database,
-  addListings
+  addListings,
+  seed
 };

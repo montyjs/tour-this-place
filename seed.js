@@ -5,21 +5,14 @@ let rooms = ['living room', 'dining room', 'bathroom', 'bedroom', 'kitchen', 'lo
 let types = ['townhouse', 'villa', 'apartment', 'mansion', 'shack', 'lean-to', 'compound', 'hostel'];
 
 
-let seedListings = []
-let seedPhotos = [];
+let seedListings = [];
 
 
 for(let i=0; i<100; i++) {
-	let listing = {
-      type: types[Math.floor(Math.random()*(types.length-1))]
-	};
-	seedListings.push(listing);
-	// for(let j=0; j<20; j++) {
-	//   let photo = {
-	//   	photoUrl: faker.image.imageUrl(),
-	//   	room: rooms[Math.floor(Math.random()*(rooms.length-1))],
-	//   }
-	//   seedPhotos.push(photo);
-	// }
+  let listing = {
+    type: types[Math.floor(Math.random()*(types.length-1))]
+  };
+  seedListings.push(listing);
 }
-db.addListings(seedListings);
+db.seed(seedListings, rooms);
+
