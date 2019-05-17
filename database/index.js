@@ -11,13 +11,13 @@ const database = knex({
   }
 });
 
-knex.schema.createTable('listings', table => {
+database.schema.createTable('listings', table => {
   table.increments('id');
   table.string('type');
   table.uuid('id').primary()
 })
 
-knex.schema.createTable('photos', table => {
+database.schema.createTable('photos', table => {
   table.increments('id');
   table.string('room');
   table.string('photoUrl');
