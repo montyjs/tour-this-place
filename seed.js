@@ -1,4 +1,3 @@
-const faker = require('faker');
 const db = require('./database/index.js');
 
 let rooms = ['living room', 'dining room', 'bathroom', 'bedroom', 'kitchen', 'loft', 'garage'];

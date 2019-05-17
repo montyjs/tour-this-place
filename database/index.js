@@ -42,10 +42,13 @@ const seed = (listings, rooms) => {
               room: rooms[Math.floor(Math.random()*(rooms.length-1))],
               listing_id: id
             }
-            database('photos').insert(photo);
+            database('photos')
+              .insert(photo)
+              .then(() => console.log(database('photos')));
           }
-        }))
-    })
+        }));
+    });
+
 }
 
 
