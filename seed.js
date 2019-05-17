@@ -22,9 +22,4 @@ for(let i=0; i<100; i++) {
 	//   seedPhotos.push(photo);
 	// }
 }
-for(let temp of seedListings){
-	console.log(temp);
-}
-for(let temp of seedPhotos){
-	console.log(temp);
-}
+db.addListings(seedListings);

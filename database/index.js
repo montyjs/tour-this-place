@@ -32,4 +32,7 @@ const addListings = (listings) => {
 }
 
 
-module.exports = database;
+module.exports = {
+  database,
+  addListings
+};
