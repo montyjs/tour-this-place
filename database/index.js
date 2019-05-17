@@ -26,5 +26,10 @@ database.schema.createTable('photos', table => {
     .references('listings.id')
 })
 
+const addListings = (listings) => {
+  database('listings')
+    .insert(listings);
+}
+
 
 module.exports = database;
