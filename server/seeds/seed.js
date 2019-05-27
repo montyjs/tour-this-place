@@ -2,8 +2,8 @@
 const faker = require('faker');
 
 
-const rooms = ['living room', 'dining room', 'bathroom', 'bedroom', 'kitchen', 'loft', 'garage'];
-const types = ['townhouse', 'villa', 'apartment', 'mansion', 'shack', 'lean-to', 'compound', 'hostel'];
+const rooms = ['Living room', 'Dining room', 'Bathroom', 'Bedroom', 'Kitchen', 'Loft', 'Garage', 'Garden', 'Man cave', 'Porch'];
+const types = ['Townhouse', 'Villa', 'Apartment', 'Mansion', 'Shack', 'Lean-to', 'Compound', 'Hostel'];
 
 
 let seedListings = [];
@@ -20,22 +20,29 @@ exports.seed = function(knex, Promise) {
   return knex('photos').del()
     .then(() => knex('listings').del())
     .then(() => {
-      return Promise.all([
-        knex('listings').insert(seedListings)
-          .then((listing) => {
-            photos = [];
-            for(let i=0; i<20; i++) {
+      return Promise.all(seedListings.map(listing => {
+        return knex('listings').insert(listing);
+      }))
+    })
+    .then(() => {
+      return knex('listings')
+        .pluck('id')
+        .then(ids=> {
+          let temp = [];
+          ids.map((id) => {
+            for(let i=0;i<20+Math.random()*30;i++) {
               photo = {
                 photoUrl: faker.image.imageUrl(),
-                room: rooms[Math.floor(Math.random()*rooms.length-1)],
-                listing_id: listing[0]
+                room: rooms[Math.floor(Math.random()*(rooms.length-1))],
+                listing_id: id
               }
-              photos.push(photo);
+              temp.push(photo)
             }
-            return knex('photos').insert(photos)
           })
-          .catch(err => console.log(err))
-      ])
+          return temp;
+        })
     })
-    .catch(err => console.log(err));
+    .then((photos) => Promise.all(photos.map(photo => {
+      if (photo.room) return knex('photos').insert(photo);
+    })))
 };

@@ -1,5 +1,3 @@
-const db = require('../index.js');
-
 exports.up = function(knex, Promise) {
   return Promise.all([
   	 knex.schema.createTable('listings', table => {
@@ -17,6 +15,8 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  knex.schema.dropTable('photos'),
-  knex.schema.dropTable('listings')
+  return Promise.all([
+    knex.schema.dropTable('photos'),
+    knex.schema.dropTable('listings')
+  ]);
 };
