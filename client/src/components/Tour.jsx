@@ -74,13 +74,13 @@ export default class Tour extends React.Component {
   componentDidMount () {
     let ranListing;
     $.ajax({
-      url: "http://localhost:3001/api/listings",
+      url: "http://localhost:3002/api/listings",
       success: (data) =>{
       ranListing = data[Math.floor(Math.random()*data.length-1)];
       },
       complete: () => {
         $.ajax({
-          url: "http://localhost:3001/api/photos",
+          url: "http://localhost:3002/api/photos",
           method: "POST",
           data: {
             id: ranListing.id
