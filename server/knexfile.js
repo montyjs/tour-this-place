@@ -6,7 +6,7 @@ module.exports = {
     connection: 'postgres://postgres:Safe@localhost/airbnb_clone_tour',
     migrations: {
       directory: __dirname + '/database/migrations',
-      seeds: __dirname + '/database/seeds/seed.js'
+      seeds: __dirname + '/seeds/seed.js'
     }
   }
 };
