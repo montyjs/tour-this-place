@@ -10,14 +10,19 @@ const Container = styled.div`
   width: 25% !important;
   padding-left: 8px !important;
   padding-right: 8px !important;
+  padding-bottom: 16px;
   display: inline-block !important;
   vertical-align: top !important;
 `;
 
 const Room = styled.p`
+  word-wrap: break-word !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.2857142857142858em !important;
+  color: #484848 !important;
   margin-top: 8px;
-  font-size: 16px;
-  font-weight: 400;
 `;
 
 const Row = styled.div`

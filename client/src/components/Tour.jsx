@@ -25,9 +25,11 @@ const Tour_Container = styled.div`
 
 const Title = styled.h1`
   font-weight: 800;
-  font-size: 36px;
-  line-height: 40px;
   margin-bottom: 48px;
+  font-size: 32px !important;
+  line-height: 40px !important;
+  letter-spacing: normal !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
 `;
 
 const Btn = styled.button`
@@ -46,12 +48,12 @@ const Btn = styled.button`
 
 const Wrap = styled.div`
   margin: 0px !important;
-  word-wrap: break-word !important;
-  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  line-height: 1.375em !important;
-  color: #484848 !important;
+    word-wrap: break-word !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 1.375em !important;
+    color: #484848 !important;
 `;
 
 
@@ -122,7 +124,7 @@ export default class Tour extends React.Component {
             <Btn id="explore-btn" >Explore all {this.state.photos.length} photos</Btn>
           </Wrap>
         </Tour_Container>
-        <hr color="EBEBEB" />
+        <hr color="EBEBEB" className="w-100" />
       </div>
       </ThemeProvider >
     );
