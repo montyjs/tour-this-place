@@ -19,13 +19,15 @@ const GlobalStyle = createGlobalStyle`
 
 const Tour_Container = styled.div`
   width: 100;
-  margin: auto 5rem 3rem 5rem;
+  padding-left: 40px;
+  padding-right: 40px;
 `;
 
 const Title = styled.h1`
   font-weight: 800;
   font-size: 36px;
   line-height: 40px;
+  margin-bottom: 48px;
 `;
 
 const Btn = styled.button`
@@ -43,10 +45,13 @@ const Btn = styled.button`
 `;
 
 const Wrap = styled.div`
-  margin: 0px;
-  word-wrap: break-word;
-  font-size: 16px;
-  font-weight: 600;
+  margin: 0px !important;
+  word-wrap: break-word !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.375em !important;
+  color: #484848 !important;
 `;
 
 
