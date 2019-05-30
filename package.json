@@ -21,6 +21,7 @@
   "homepage": "https://github.com/cchasewood/tour-this-place#readme",
   "dependencies": {
     "babel": "^6.23.0",
+    "cors": "^2.8.5",
     "eslint": "^5.16.0",
     "eslint-config-hackreactor": "github:hackreactor-labs/eslint-config-hackreactor",
     "express": "^4.17.0",

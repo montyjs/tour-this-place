@@ -1,8 +1,12 @@
 import React from 'react';
-import styled, {createGlobalStyle} from 'styled-components';
+import styled, {ThemeProvider, createGlobalStyle} from 'styled-components';
 import $ from 'jquery';
 
 import PhotoRow from './PhotoRow.jsx';
+
+const theme = {
+  main: 'red'
+}
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -13,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Container = styled.div`
+const Tour_Container = styled.div`
   width: 100;
   margin: auto 5rem 3rem 5rem;
 `;
@@ -100,9 +104,10 @@ export default class Tour extends React.Component {
   render() {
     let photos = this.getRoomPreview(this.state.photos);
     return (
+      <ThemeProvider theme={theme} >
       <div>
         <GlobalStyle />
-        <Container>
+        <Tour_Container>
           <Title>Tour this {this.state.listing.type}</Title>
           <div className="pb-4">
             <PhotoRow id="r1" photos={photos.slice(0, 4)} />
@@ -111,8 +116,10 @@ export default class Tour extends React.Component {
           <Wrap className="pt-3">
             <Btn id="explore-btn" >Explore all {this.state.photos.length} photos</Btn>
           </Wrap>
-        </Container>
+        </Tour_Container>
+        <hr color="EBEBEB" />
       </div>
+      </ThemeProvider >
     );
   }
 }

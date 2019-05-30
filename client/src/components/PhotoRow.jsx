@@ -21,7 +21,7 @@ const Room = styled.p`
   font-weight: 400;
 `;
 
-const Row = styled.p`
+const Row = styled.div`
   padding-top: 5rem;
   width: 100%;
   display: flex;

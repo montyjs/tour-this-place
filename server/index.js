@@ -3,9 +3,11 @@ const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 let app = express();
 
+app.use(cors());
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
