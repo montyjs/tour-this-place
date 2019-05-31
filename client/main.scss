@@ -1,0 +1,64 @@
+#tour-container {
+  font-family: 'Roboto', Helvetica Neue, sans-serif;
+  font-size: 14px;
+  color: #484848;
+  line-height: 1.43;
+  width: 100;
+  padding-left: 40px;
+  padding-right: 40px;
+
+  #tour-title {
+    font-weight: 800;
+    margin-bottom: 48px;
+    font-size: 32px !important;
+    line-height: 40px !important;
+    letter-spacing: normal !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  }
+  .photo-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .tour-photo-container {
+      width: 25% !important;
+      padding-left: 8px !important;
+      padding-right: 8px !important;
+      padding-bottom: 16px;
+      display: inline-block !important;
+      vertical-align: top !important;
+      .room-photo-description {
+        word-wrap: break-word !important;
+        font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        line-height: 1.2857142857142858em !important;
+        color: #484848 !important;
+        margin-top: 8px;
+      }
+    }
+  }
+  #explore-btn-wrapper {
+    margin: 0px !important;
+    word-wrap: break-word !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 1.375em !important;
+    color: #484848 !important;
+
+    #explore-btn {
+      color: var(--color-brand-plus, #914669);
+      background: transparent;
+      border: 0px;
+      cursor: pointer;
+      margin: 0px;
+      padding: 0px;
+      user-select: auto;
+      text-align: left;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }  
+}
