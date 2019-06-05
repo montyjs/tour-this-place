@@ -3,7 +3,7 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://postgres:Safe@localhost/airbnb_clone_tour',
+    connection: 'postgres://jordan:Safe@localhost/airbnb_clone_tour',
     migrations: {
       directory: __dirname + '/database/migrations',
       seeds: __dirname + '/seeds/seed.js'
