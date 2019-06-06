@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest-webpack",
-    "start": "nodemon server/index.js",
+    "start": "nodemon SDC-server/index.js",
     "react-dev": "webpack -d --watch",
-    "seed": "node server/seeds/seed.js"
+    "build-db-sdc": "psql -d sdc_airbnb -f schema.sql",
+    "seed-sdc": "node SDC-database/seed.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   "dependencies": {
     "babel": "^6.23.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "eslint": "^5.16.0",
     "eslint-config-hackreactor": "github:hackreactor-labs/eslint-config-hackreactor",
     "express": "^4.17.0",
