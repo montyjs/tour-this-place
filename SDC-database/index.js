@@ -13,10 +13,8 @@ const getPhotos = (cb) => {
   let number = Math.floor(Math.random() * 99);
   pool.query(`SELECT * FROM bigboi WHERE id = ${number}`, (error, results) => {
     if (error) {
-      console.error('database index.js', error);
       throw error;
     } else {
-      console.log('database index', results);
       cb(error, results);
     }
   });

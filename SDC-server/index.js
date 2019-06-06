@@ -14,13 +14,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/photos', (req, res) => {
-  console.log('made it to server');
   db.getPhotos((err, result) => {
     if (err) {
-      console.error(err, 'failed in server');
+      console.error(err);
       res.sendStatus(400);
     } else {
-      console.log('result returned', result);
       res.send(result);
     }
   });
