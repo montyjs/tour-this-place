@@ -1,5 +1,7 @@
-const faker = require('faker');
 const { pool } = require('./index');
+const fs = require('fs');
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+require('fs').promises; 
 
 const LIVING_ROOM = [
   'https://airbnb-tour-photos.s3-us-west-1.amazonaws.com/room_photos/Living+Room/img1.jpg',
@@ -55,16 +57,57 @@ const ENTRANCE = [
 
 const TYPES = ['Townhouse', 'Villa', 'Apartment', 'Mansion', 'Shack', 'Lean-to', 'Compound', 'Hostel'];
 
-const seed = () => {
-  for (let i = 0; i < 100; i++) {
-
-    let data = [TYPES[Math.floor(Math.random() * (TYPES.length))], DINING_ROOM[Math.floor(Math.random() * (DINING_ROOM.length))], BEDROOM[Math.floor(Math.random() * (BEDROOM.length))], LIVING_ROOM[Math.floor(Math.random() * (LIVING_ROOM.length))], PATIO[Math.floor(Math.random() * (PATIO.length))], KITCHEN[Math.floor(Math.random() * (KITCHEN.length))], BATHROOM[Math.floor(Math.random() * (BATHROOM.length))], ENTRANCE[Math.floor(Math.random() * (ENTRANCE.length))]];
-
-    pool.query('INSERT INTO bigboi (listing, diningroom, bedroom, livingroom, patio, kitchen, bathroom, entrance) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', data, (error) => {
-      if (error) { throw error; }
-    });
-
-  }
+let data = {
+  listings: TYPES[Math.floor(Math.random() * (TYPES.length))], 
+  diningroom: DINING_ROOM[Math.floor(Math.random() * (DINING_ROOM.length))], 
+  bedroom: BEDROOM[Math.floor(Math.random() * (BEDROOM.length))], 
+  livingroom: LIVING_ROOM[Math.floor(Math.random() * (LIVING_ROOM.length))], 
+  patio: PATIO[Math.floor(Math.random() * (PATIO.length))], 
+  kitchen: KITCHEN[Math.floor(Math.random() * (KITCHEN.length))], 
+  bathroom: BATHROOM[Math.floor(Math.random() * (BATHROOM.length))], 
+  entrance: ENTRANCE[Math.floor(Math.random() * (ENTRANCE.length))]
 };
 
-seed();
+
+const seed = (count) => {
+  let dataEntries = [];
+  
+  let csvWriter = createCsvWriter({  
+    path: 'CSV-Holder/out.csv',
+    header: ['listings', 'diningroom', 'bedroom', 'livingroom', 'patio', 'kitchen', 'bathroom', 'entrance']
+  });
+
+  for (let i = 0; i < 100000; i++) {
+    //manipulating the data variable instead of reinstantiating it each loop saves memory
+    data = {
+      listings: count, 
+      diningroom: DINING_ROOM[Math.floor(Math.random() * (DINING_ROOM.length))], 
+      bedroom: BEDROOM[Math.floor(Math.random() * (BEDROOM.length))], 
+      livingroom: LIVING_ROOM[Math.floor(Math.random() * (LIVING_ROOM.length))], 
+      patio: PATIO[Math.floor(Math.random() * (PATIO.length))], 
+      kitchen: KITCHEN[Math.floor(Math.random() * (KITCHEN.length))], 
+      bathroom: BATHROOM[Math.floor(Math.random() * (BATHROOM.length))], 
+      entrance: ENTRANCE[Math.floor(Math.random() * (ENTRANCE.length))]
+    };
+    dataEntries.push(data);
+  }
+  csvWriter  
+    .writeRecords(dataEntries)
+    .then(()=> {
+      count++;
+    })
+    .then(()=> {
+      return pool.query('COPY bigboi(listing, diningroom, bedroom, livingroom, patio, kitchen, bathroom, entrance) FROM \'/Users/jordan/Documents/Galvanize/SDC/tour-this-place/CSV-Holder/out.csv\' WITH (FORMAT csv);', (error) => {
+        if (error) { throw error; }
+        if (count > 100) {
+          console.log('SEEDING COMPLETE');
+          return;
+        } else {
+          seed(count);
+        }
+      });
+    });
+};
+
+console.log('Seeding will take about 4 minutes');
+seed(1);
