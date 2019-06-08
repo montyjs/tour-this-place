@@ -1,6 +1,37 @@
-const { pool } = require('./index');
-const fs = require('fs');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+// const mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/fetcher', {useMongoClient: true});
+
+// let photosSchema = mongoose.Schema({
+//   listings: String,
+//   diningroom: String,
+//   bedroom: String,
+//   livingroom: String,
+//   patio: String,
+//   kitchen: String,
+//   bathroom: String,
+//   entrance: String
+// });
+
+// let Photos = mongoose.model('Photos', photosSchema);
+
+// let save = (data) => {
+//   data.map(data => {
+//     let entry = new Photos(data);
+//     entry.save((err) => {
+//       if (err) { console.error(err); }
+//     });
+//   });
+// };
+
+// let getPhotos = (cb) => {
+//   Photos.find().sort({$natural: -1}).limit(25).exec((err, docs) => {
+//     if (err) { console.error(err); }
+//     cb(err, docs);
+//   });
+// };
+
+
 // require('fs').promises; 
 
 const LIVING_ROOM = [
@@ -73,11 +104,11 @@ const seed = (count) => {
   let dataEntries = [];
   
   let csvWriter = createCsvWriter({  
-    path: 'CSV-Holder/out.csv',
+    path: `CSV-Mongo-Holder/out${count}.csv`,
     header: ['listings', 'diningroom', 'bedroom', 'livingroom', 'patio', 'kitchen', 'bathroom', 'entrance']
   });
 
-  for (let i = 0; i < 100000; i++) {
+  for (let i = 0; i < 1000000; i++) {
     //manipulating the data variable instead of reinstantiating it each loop saves memory
     data = {
       listings: TYPES[Math.floor(Math.random() * (TYPES.length))], 
@@ -97,20 +128,18 @@ const seed = (count) => {
       count++;
     })
     .then(()=> {
-      return pool.query('COPY bigboi(listing, diningroom, bedroom, livingroom, patio, kitchen, bathroom, entrance) FROM \'/Users/jordan/Documents/Galvanize/SDC/tour-this-place/CSV-Holder/out.csv\' WITH (FORMAT csv);', (error) => {
-        if (error) { throw error; }
-        if (count > 100) {
-          console.log('SEEDING COMPLETE');
-          return;
-        } else {
-          if ((count - 1) % 10 === 0) {
-            console.log(`${(count - 1) / 10}million of 10 million entries created`);
-          }
-          seed(count);
-        }
-      });
+      if (count > 10) {
+        console.log('SEEDING COMPLETE');
+        return;
+      } else {
+        console.log(`${(count - 1)}million of 10 million entries created`);
+        seed(count);
+      }
     });
 };
 
-console.log('Seeding will take about 4 minutes');
+
 seed(1);
+
+// module.exports.save = save;
+// module.exports.getPhotos = getPhotos;

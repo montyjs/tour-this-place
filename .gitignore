@@ -3,3 +3,16 @@ node_modules
 public/bundle.js
 
 room_photos
+
+CSV-Holder/out.csv
+
+CSV-Mongo-Holder/out1.csv
+CSV-Mongo-Holder/out2.csv
+CSV-Mongo-Holder/out3.csv
+CSV-Mongo-Holder/out4.csv
+CSV-Mongo-Holder/out5.csv
+CSV-Mongo-Holder/out6.csv
+CSV-Mongo-Holder/out7.csv
+CSV-Mongo-Holder/out8.csv
+CSV-Mongo-Holder/out9.csv
+CSV-Mongo-Holder/out10.csv

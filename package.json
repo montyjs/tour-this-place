@@ -7,8 +7,9 @@
     "test": "jest-webpack",
     "start": "nodemon SDC-server/index.js",
     "react-dev": "webpack -d --watch",
-    "build-db-sdc-sql": "psql -d sdc_airbnb -f schema.sql",
-    "seed-db-sdc-sql": "export NODE_OPTIONS=--max_old_space_size=8192 && node SDC-database/seed-sql.js"
+    "build-sql": "psql -d sdc_airbnb -f schema.sql",
+    "seed-sql": "export NODE_OPTIONS=--max_old_space_size=8192 && node SDC-database/seed-sql.js",
+    "seed-mongo": "node SDC-database/seed-mongo.js; ./mongo-seed.sh"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "jest": "^24.8.0",
     "jquery": "^3.4.1",
     "knex": "^0.16.5",
+    "mongoose": "^5.5.13",
     "pg": "^7.11.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
