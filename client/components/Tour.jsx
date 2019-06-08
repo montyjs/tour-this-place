@@ -9,7 +9,7 @@ export default class Tour extends React.Component {
     super(props);
 
     this.state = {
-      listing: 'Placeholder',
+      listing: '',
       photos: []
     };
   }
@@ -18,20 +18,21 @@ export default class Tour extends React.Component {
     $.ajax({
       method: 'GET',
       url: 'http://localhost:3002/photos',
-      success: (data) =>{
-        console.log('componentDidMount success', data.rows[0]);
+      success: (data) => {
+        console.log('componentDidMount success', data);
         this.setState({
-          listing: data.rows[0].listing,
+          listing: data.listings,
           photos: [
-            {room: 'Dining Room', url: data.rows[0].diningroom}, 
-            {room: 'Bed Room', url: data.rows[0].bedroom}, 
-            {room: 'Living Room', url: data.rows[0].livingroom}, 
-            {room: 'Patio', url: data.rows[0].patio}, 
-            {room: 'Kitchen', url: data.rows[0].kitchen}, 
-            {room: 'Bathroom', url: data.rows[0].bathroom}, 
-            {room: 'Entrance', url: data.rows[0].entrance}
+            {room: 'Dining Room', url: data.diningroom}, 
+            {room: 'Bed Room', url: data.bedroom}, 
+            {room: 'Living Room', url: data.livingroom}, 
+            {room: 'Patio', url: data.patio}, 
+            {room: 'Kitchen', url: data.kitchen}, 
+            {room: 'Bathroom', url: data.bathroom}, 
+            {room: 'Entrance', url: data.entrance}
           ]
         });
+        
       },
       error: (err) => {
         console.log('componentDidNOTMount blah dang');
@@ -50,7 +51,7 @@ export default class Tour extends React.Component {
             <PhotoRow id="r2" photos={this.state.photos.slice(4, 7)} />
           </div>
           <div id="explore-btn-wrapper" className="pt-3">
-            <btn id="explore-btn" >Explore all {8 + (Math.floor(Math.random() * 18))} photos</btn>
+            <button id="explore-btn" >Explore all {8 + (Math.floor(Math.random() * 18))} photos</button>
           </div>
         </div>
         <hr color="EBEBEB" className="w-100" />

@@ -1,4 +1,4 @@
-const { pool } = require('./index');
+const { pool } = require('./router');
 const fs = require('fs');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 // require('fs').promises; 
@@ -97,7 +97,7 @@ const seed = (count) => {
       count++;
     })
     .then(()=> {
-      return pool.query('COPY bigboi(listing, diningroom, bedroom, livingroom, patio, kitchen, bathroom, entrance) FROM \'/Users/jordan/Documents/Galvanize/SDC/tour-this-place/CSV-Holder/out.csv\' WITH (FORMAT csv);', (error) => {
+      return pool.query('COPY bigboi(listings, diningroom, bedroom, livingroom, patio, kitchen, bathroom, entrance) FROM \'/Users/jordan/Documents/Galvanize/SDC/tour-this-place/CSV-Holder/out.csv\' WITH (FORMAT csv);', (error) => {
         if (error) { throw error; }
         if (count > 100) {
           console.log('SEEDING COMPLETE');

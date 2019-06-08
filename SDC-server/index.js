@@ -3,7 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-const db = require('../SDC-database/index.js');
+const db = require('../SDC-database/router.js');
+const mongoose = require('mongoose');
 
 const app = express();
 const port = process.env.LOCAL_PORT;
@@ -24,7 +25,17 @@ app.get('/photos', (req, res) => {
   });
 });
 
-app.listen(port, (err) => {
-  if (err) { console.log(err); }
-  console.log(`listening on port ${port}`);
-});
+if (process.env.DB_ENV === 'postgres') {
+  app.listen(port, (err) => {
+    if (err) { console.log(err); }
+    console.log(`listening on port ${port}`);
+  });
+} else {
+  mongoose.connect('mongodb://localhost/sdc_db', { useNewUrlParser: true }, (error)=> {
+    if (error) { return console.error(error); }
+    app.listen(port, (err) => {
+      if (err) { console.log(err); }
+      console.log(`listening on port ${port}`);
+    });
+  });
+}

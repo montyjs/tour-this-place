@@ -1,5 +1,7 @@
 node_modules
 
+.env
+
 public/bundle.js
 
 room_photos

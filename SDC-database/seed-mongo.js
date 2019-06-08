@@ -111,13 +111,13 @@ const seed = (count) => {
   for (let i = 0; i < 1000000; i++) {
     //manipulating the data variable instead of reinstantiating it each loop saves memory
     data = {
-      listings: TYPES[Math.floor(Math.random() * (TYPES.length))], 
-      diningroom: DINING_ROOM[Math.floor(Math.random() * (DINING_ROOM.length))], 
-      bedroom: BEDROOM[Math.floor(Math.random() * (BEDROOM.length))], 
-      livingroom: LIVING_ROOM[Math.floor(Math.random() * (LIVING_ROOM.length))], 
-      patio: PATIO[Math.floor(Math.random() * (PATIO.length))], 
-      kitchen: KITCHEN[Math.floor(Math.random() * (KITCHEN.length))], 
-      bathroom: BATHROOM[Math.floor(Math.random() * (BATHROOM.length))], 
+      listings: TYPES[Math.floor(Math.random() * (TYPES.length))],
+      diningroom: DINING_ROOM[Math.floor(Math.random() * (DINING_ROOM.length))],
+      bedroom: BEDROOM[Math.floor(Math.random() * (BEDROOM.length))],
+      livingroom: LIVING_ROOM[Math.floor(Math.random() * (LIVING_ROOM.length))],
+      patio: PATIO[Math.floor(Math.random() * (PATIO.length))],
+      kitchen: KITCHEN[Math.floor(Math.random() * (KITCHEN.length))],
+      bathroom: BATHROOM[Math.floor(Math.random() * (BATHROOM.length))],
       entrance: ENTRANCE[Math.floor(Math.random() * (ENTRANCE.length))]
     };
     dataEntries.push(data);
