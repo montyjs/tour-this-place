@@ -1,7 +1,5 @@
 const { pool } = require('./router');
-const fs = require('fs');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-// require('fs').promises; 
 
 const LIVING_ROOM = [
   'https://airbnb-tour-photos.s3-us-west-1.amazonaws.com/room_photos/Living+Room/img1.jpg',

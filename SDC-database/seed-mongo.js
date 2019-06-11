@@ -1,38 +1,4 @@
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-// const mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/fetcher', {useMongoClient: true});
-
-// let photosSchema = mongoose.Schema({
-//   listings: String,
-//   diningroom: String,
-//   bedroom: String,
-//   livingroom: String,
-//   patio: String,
-//   kitchen: String,
-//   bathroom: String,
-//   entrance: String
-// });
-
-// let Photos = mongoose.model('Photos', photosSchema);
-
-// let save = (data) => {
-//   data.map(data => {
-//     let entry = new Photos(data);
-//     entry.save((err) => {
-//       if (err) { console.error(err); }
-//     });
-//   });
-// };
-
-// let getPhotos = (cb) => {
-//   Photos.find().sort({$natural: -1}).limit(25).exec((err, docs) => {
-//     if (err) { console.error(err); }
-//     cb(err, docs);
-//   });
-// };
-
-
-// require('fs').promises; 
 
 const LIVING_ROOM = [
   'https://airbnb-tour-photos.s3-us-west-1.amazonaws.com/room_photos/Living+Room/img1.jpg',
@@ -122,6 +88,7 @@ const seed = (count) => {
     };
     dataEntries.push(data);
   }
+  
   csvWriter  
     .writeRecords(dataEntries)
     .then(()=> {
@@ -140,6 +107,3 @@ const seed = (count) => {
 
 
 seed(1);
-
-// module.exports.save = save;
-// module.exports.getPhotos = getPhotos;

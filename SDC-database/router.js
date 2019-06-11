@@ -44,7 +44,9 @@ if (process.env.DB_ENV === 'postgres') {
   let Photos = mongoose.model('listings', photosSchema);
 
   let getPhotos = (cb) => {
-    Photos.find({listings: 'Mansion'}).limit(1).exec((err, docs) => {
+    let listings = ['Townhouse', 'Villa', 'Apartment', 'Mansion', 'Shack', 'Lean-to', 'Compound', 'Hostel'];
+    let random = listings[Math.floor(Math.random() * 8)];
+    Photos.find({listings: random}).limit(1).exec((err, docs) => {
       if (err) { throw (err); }
       cb(err, docs[0]);
     });
@@ -55,35 +57,3 @@ if (process.env.DB_ENV === 'postgres') {
   };
 
 }  
-
-// const mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/fetcher', {useMongoClient: true});
-
-// let photosSchema = mongoose.Schema({
-//   listings: String,
-//   diningroom: String,
-//   bedroom: String,
-//   livingroom: String,
-//   patio: String,
-//   kitchen: String,
-//   bathroom: String,
-//   entrance: String
-// });
-
-// let Photos = mongoose.model('Photos', photosSchema);
-
-// let save = (data) => {
-//   data.map(data => {
-//     let entry = new Photos(data);
-//     entry.save((err) => {
-//       if (err) { console.error(err); }
-//     });
-//   });
-// };
-
-// let getPhotos = (cb) => {
-//   Photos.find().sort({$natural: -1}).limit(25).exec((err, docs) => {
-//     if (err) { console.error(err); }
-//     cb(err, docs);
-//   });
-// };

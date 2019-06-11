@@ -2,9 +2,15 @@ node_modules
 
 .env
 
+.eslintrc.js
+
 public/bundle.js
 
 room_photos
+
+newrelic.js
+
+newrelic_agent.log
 
 CSV-Holder/out.csv
 
