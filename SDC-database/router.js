@@ -41,7 +41,9 @@ if (process.env.DB_ENV === 'postgres') {
     entrance: String
   });
 
-  let Photos = mongoose.model('listings', photosSchema);
+
+  const Photos = mongoose.model('listings', photosSchema);
+  
 
   let getPhotos = (cb) => {
     let listings = ['Townhouse', 'Villa', 'Apartment', 'Mansion', 'Shack', 'Lean-to', 'Compound', 'Hostel'];
@@ -56,4 +58,4 @@ if (process.env.DB_ENV === 'postgres') {
     getPhotos,
   };
 
-}  
+}

@@ -24,6 +24,8 @@ Proxy
   -  See below:
 ```
 NODE_ENV=development
+DB_ENV=mongo
+DB_AWS=no
 LOCAL_USER= <USERNAME>
 LOCAL_HOST= 'localhost'
 LOCAL_DATABASE='sdc_airbnb'
@@ -31,10 +33,9 @@ LOCAL_PASSWORD= <PASSWORD>
 LOCAL_PORT= 3002
 ```
 3. You will also need to set '<USERNAME>' to your psql username in package.json script 'build-dev-db'
-4. Run ``` npm run build-db-sdc ``` to build database
-5. Run ``` npm run seed-sdc ``` to seed the database
-6. Run ``` npm run react-dev ``` to compile jsx files
-7. Run ``` npm run start ``` to start express
+4. Run ``` npm run seed-mongo ``` to seed the database
+5. Run ``` npm run react-dev ``` to compile jsx files
+6. Run ``` npm run start ``` to start express
 
 ## Requirements
 

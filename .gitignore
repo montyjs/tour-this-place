@@ -4,6 +4,8 @@ node_modules
 
 .eslintrc.js
 
+mongo-aws-seed.sh
+
 public/bundle.js
 
 room_photos

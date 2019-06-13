@@ -32,11 +32,21 @@ if (process.env.DB_ENV === 'postgres') {
     console.log(`listening on port ${port}`);
   });
 } else {
-  mongoose.connect('mongodb://localhost/sdc_db', { useNewUrlParser: true }, (error)=> {
-    if (error) { return console.error(error); }
-    app.listen(port, (err) => {
-      if (err) { console.log(err); }
-      console.log(`listening on port ${port}`);
+  if (process.env.DB_AWS === 'yes') {
+    mongoose.connect(process.env.AWS_CONN_STRING_1, { useNewUrlParser: true }, (error)=> {
+      if (error) { return console.error(error); }
+      app.listen(port, (err) => {
+        if (err) { console.log(err); }
+        console.log(`listening on port ${port}`);
+      });
     });
-  });
+  } else if (process.env.DB_AWS === 'no') {
+    mongoose.connect('mongodb://localhost/sdc_db', { useNewUrlParser: true }, (error)=> {
+      if (error) { return console.error(error); }
+      app.listen(port, (err) => {
+        if (err) { console.log(err); }
+        console.log(`listening on port ${port}`);
+      });
+    });
+  }
 }
