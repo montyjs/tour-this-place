@@ -16,7 +16,7 @@ export default class Tour extends React.Component {
   componentDidMount () {
     $.ajax({
       method: 'GET',
-      url: `http://${window.location.hostname}:3002/test`,
+      url: `http://${window.location.hostname}:3002/photos`,
       success: (data) => {
         console.log('componentDidMount success', data);
         this.setState({
