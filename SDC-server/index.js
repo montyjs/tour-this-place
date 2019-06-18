@@ -1,8 +1,8 @@
 require('newrelic');
 require('dotenv').config();
-import renderRouterMiddleware from '../iso-middleware/renderRoute';
 import express from 'express';
 import bodyParser from 'body-parser';
+import renderToPage from '../iso-middleware/renderRoute';
 import path from 'path';
 import cors from 'cors';
 import db from '../SDC-database/router.js';
@@ -30,7 +30,7 @@ app.get('/photos', (req, res) => {
   });
 });
 
-app.get('*', renderRouterMiddleware);
+app.get('*', renderToPage);
 
 if (process.env.DB_ENV === 'postgres') {
   app.listen(port, (err) => {

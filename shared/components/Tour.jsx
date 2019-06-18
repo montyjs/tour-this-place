@@ -1,9 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
+import withStyles from 'isomorphic-style-loader/withStyles';
+import PhotoRow from './PhotoRow.jsx';
 
-import PhotoRow from './PhotoRow.jsx.js';
-
-export default class Tour extends React.Component {
+class Tour extends React.Component {
   constructor(props) {
     super(props);
 
@@ -57,3 +57,5 @@ export default class Tour extends React.Component {
     );
   }
 }
+
+export default Tour;

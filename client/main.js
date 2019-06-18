@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '../shared/App';
+import Tour from '../shared/components/Tour';
+
 
 const renderRouter = Component => {
   ReactDOM.hydrate(
@@ -8,4 +9,4 @@ const renderRouter = Component => {
     document.getElementById('root')
   );
 };
-renderRouter(App);
+renderRouter(Tour);
