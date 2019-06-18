@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-import PhotoRow from './PhotoRow.jsx';
+import PhotoRow from './PhotoRow.jsx.js';
 
 export default class Tour extends React.Component {
   constructor(props) {
