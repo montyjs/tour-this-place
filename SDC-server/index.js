@@ -1,19 +1,23 @@
 require('newrelic');
 require('dotenv').config();
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const cors = require('cors');
-const db = require('../SDC-database/router.js');
-const mongoose = require('mongoose');
+import renderRouterMiddleware from '../iso-middleware/renderRoute';
+import express from 'express';
+import bodyParser from 'body-parser';
+import path from 'path';
+import cors from 'cors';
+import db from '../SDC-database/router.js';
+import mongoose from 'mongoose';
 
 const app = express();
 const port = process.env.LOCAL_PORT;
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, '../public/')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const buildPath = path.join(__dirname, '../', 'build');
+app.use('/', express.static(buildPath));
+app.use(express.static(__dirname));
 
 app.get('/photos', (req, res) => {
   db.getPhotos((err, result) => {
@@ -25,6 +29,8 @@ app.get('/photos', (req, res) => {
     }
   });
 });
+
+app.get('*', renderRouterMiddleware);
 
 if (process.env.DB_ENV === 'postgres') {
   app.listen(port, (err) => {
@@ -50,3 +56,5 @@ if (process.env.DB_ENV === 'postgres') {
     });
   }
 }
+
+module.exports = app;
