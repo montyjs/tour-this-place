@@ -33,7 +33,7 @@ if (process.env.DB_ENV === 'postgres') {
   });
 } else {
   if (process.env.DB_AWS === 'yes') {
-    mongoose.connect(process.env.AWS_CONN_STRING_1, { useNewUrlParser: true }, (error)=> {
+    mongoose.connect(process.env.AWS_CONN_STRING_FULL, { useNewUrlParser: true }, (error)=> {
       if (error) { return console.error(error); }
       app.listen(port, (err) => {
         if (err) { console.log(err); }
