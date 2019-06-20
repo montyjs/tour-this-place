@@ -6,38 +6,46 @@ import PhotoRow from './PhotoRow.jsx';
 class Tour extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
-      listing: '',
-      photos: []
+      listing: this.props.data.listings,
+      photos: [
+        {room: 'Dining Room', url: this.props.data.diningroom}, 
+        {room: 'Bed Room', url: this.props.data.bedroom}, 
+        {room: 'Living Room', url: this.props.data.livingroom}, 
+        {room: 'Patio', url: this.props.data.patio}, 
+        {room: 'Kitchen', url: this.props.data.kitchen}, 
+        {room: 'Bathroom', url: this.props.data.bathroom}, 
+        {room: 'Entrance', url: this.props.data.entrance}
+      ]
     };
   }
 
-  componentDidMount () {
-    $.ajax({
-      method: 'GET',
-      url: `http://${window.location.hostname}:3002/photos`,
-      success: (data) => {
-        console.log('componentDidMount success', data);
-        this.setState({
-          listing: data.listings,
-          photos: [
-            {room: 'Dining Room', url: data.diningroom}, 
-            {room: 'Bed Room', url: data.bedroom}, 
-            {room: 'Living Room', url: data.livingroom}, 
-            {room: 'Patio', url: data.patio}, 
-            {room: 'Kitchen', url: data.kitchen}, 
-            {room: 'Bathroom', url: data.bathroom}, 
-            {room: 'Entrance', url: data.entrance}
-          ]
-        });
+  // componentDidMount () {
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: `http://${window.location.hostname}:3002/photos`,
+  //     success: (data) => {
+  //       console.log('componentDidMount success', data);
+  //       this.setState({
+  //         listing: data.listings,
+  //         photos: [
+  //           {room: 'Dining Room', url: data.diningroom}, 
+  //           {room: 'Bed Room', url: data.bedroom}, 
+  //           {room: 'Living Room', url: data.livingroom}, 
+  //           {room: 'Patio', url: data.patio}, 
+  //           {room: 'Kitchen', url: data.kitchen}, 
+  //           {room: 'Bathroom', url: data.bathroom}, 
+  //           {room: 'Entrance', url: data.entrance}
+  //         ]
+  //       });
         
-      },
-      error: (err) => {
-        console.log('componentDidNOTMount blah dang');
-      }
-    });
-  }
+  //     },
+  //     error: (err) => {
+  //       console.log('componentDidNOTMount blah dang');
+  //     }
+  //   });
+  // }
 
   render() {
     return (

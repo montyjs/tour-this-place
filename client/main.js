@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import Tour from '../shared/components/Tour';
 
 
-const renderRouter = Component => {
-  ReactDOM.hydrate(
-    <Component />,
-    document.getElementById('tour')
-  );
-};
-renderRouter(Tour);
+// const renderRouter = Component => {
+//   ReactDOM.hydrate(
+//     <Component />,
+//     document.getElementById('tour')
+//   );
+// };
+
+// export default renderRouter;

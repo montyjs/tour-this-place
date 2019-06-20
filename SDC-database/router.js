@@ -46,12 +46,19 @@ if (process.env.DB_ENV === 'postgres') {
   const Photos = mongoose.model('listings', photosSchema);
   
 
-  let getPhotos = (cb) => {
-    let random = Math.floor(Math.random() * 1000000);
-    Photos.find({_id: random}).exec((err, docs) => {
-      if (err) { throw (err); }
-      cb(err, docs[0]);
-    });
+  let getPhotos = (target, cb) => {
+    if (target >= -1) {
+      let random = Math.floor(Math.random() * 10000001);
+      Photos.find({_id: random}).exec((err, docs) => {
+        if (err) { cb(err); }
+        cb(null, docs[0]);
+      });
+    } else {
+      Photos.find({_id: target}).exec((err, docs) => {
+        if (err) { cb(err); }
+        cb(null, docs[0]);
+      });
+    }
   };
 
   module.exports = {

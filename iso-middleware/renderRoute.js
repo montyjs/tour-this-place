@@ -2,67 +2,54 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import HTML from '../shared/components/HTML';
 import Tour from '../shared/components/Tour';
+import db from '../SDC-database/router';
+import fs from 'fs';
+import styles from '../shared/styles';
 
-const renderToPage = (req, res) => {
-  const app = renderToString(<Tour />);
-  let html = renderToString(<HTML html={app} />);
-  html = html.replace('<style></style>', `<style type="text/css">
-  #tour-container {
-    font-family: 'Roboto', Helvetica Neue, sans-serif;
-    font-size: 14px;
-    color: #484848;
-    line-height: 1.43;
-    width: 100;
-    padding-left: 40px;
-    padding-right: 40px; }
-    #tour-container #tour-title {
-      font-weight: 800;
-      margin-bottom: 48px;
-      font-size: 32px !important;
-      line-height: 40px !important;
-      letter-spacing: normal !important;
-      font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important; }
-    #tour-container .photo-row {
-      width: 100%;
-      display: flex;
-      justify-content: left; }
-      #tour-container .photo-row .tour-photo-container {
-        width: 25% !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-        padding-bottom: 16px;
-        display: inline-block !important;
-        vertical-align: top !important; }
-        #tour-container .photo-row .tour-photo-container .room-photo-description {
-          word-wrap: break-word !important;
-          font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-          font-size: 14px !important;
-          font-weight: 600 !important;
-          line-height: 1.2857142857142858em !important;
-          color: #484848 !important;
-          margin-top: 8px; }
-    #tour-container #explore-btn-wrapper {
-      margin: 0px !important;
-      word-wrap: break-word !important;
-      font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-      font-size: 16px !important;
-      font-weight: 600 !important;
-      line-height: 1.375em !important;
-      color: #484848 !important; }
-      #tour-container #explore-btn-wrapper #explore-btn {
-        color: var(--color-brand-plus, #914669);
-        background: transparent;
-        border: 0px;
-        cursor: pointer;
-        margin: 0px;
-        padding: 0px;
-        user-select: auto;
-        text-align: left; }
-        #tour-container #explore-btn-wrapper #explore-btn:hover {
-          text-decoration: underline; }
-  
-      </style>`);
-  return res.send(`<!DOCTYPE html>${html}`);
+const renderToService = (req, res) => {
+
+  db.getPhotos(-1, (err, result) => {
+    if (err) {
+      console.error('error', err);
+    } else {
+      const app = renderToString(<Tour data={result}/>);
+      fs.readFile('/Users/jordan/Documents/Galvanize/SDC/tour-this-place/index.html', (err, result) => {
+        if (err) { throw err; }
+        result = result.toString('utf8');
+        result = result.replace('<div></div>', app);
+        result = result.replace('<style></style>', styles);
+        return res.send(`<!DOCTYPE html>${result}`);
+      });
+      //if req.url === url/proxy then use proxy HTML template
+    }
+  });
 };
 
-export default renderToPage;
+const renderToProxy = (req, res) => {
+  console.log('req.param.id', req.param.id);
+  db.getPhotos((err, result) => {
+    if (err) {
+      console.error('error', err);
+    } else {
+      const app = renderToString(<Tour data={result}/>);
+      fs.readFile('/Users/jordan/Documents/Galvanize/SDC/tour-this-place/proxy.html', (err, result) => {
+        if (err) { throw err; }
+        result = result.toString('utf8');
+        result = result.replace('<div></div>', app);
+        result = result.replace('<style></style>', styles);
+        return res.send(`<!DOCTYPE html>${result}`);
+      }, req.param.id);
+      //if req.url === url/proxy then use proxy HTML template
+    }
+  });  
+};
+
+module.exports = {
+  renderToService,
+  renderToProxy
+};
+
+
+
+
+//export to renderToService and export renderToProxy to split up instead of having a conditional to use a differnet template. Both should use db call to apply data to Tour instead of using componentdidmount with hydrate. Especially rendertoproxy because proxy req will have the param to query by.

@@ -2,10 +2,9 @@ require('newrelic');
 require('dotenv').config();
 import express from 'express';
 import bodyParser from 'body-parser';
-import renderToPage from '../iso-middleware/renderRoute';
+import { renderToService, renderToProxy } from '../iso-middleware/renderRoute';
 import path from 'path';
 import cors from 'cors';
-import db from '../SDC-database/router.js';
 import mongoose from 'mongoose';
 
 const app = express();
@@ -16,21 +15,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const buildPath = path.join(__dirname, '../', 'build');
-app.use('/', express.static(buildPath));
+app.use(express.static(buildPath));
 app.use(express.static(__dirname));
 
-app.get('/photos', (req, res) => {
-  db.getPhotos((err, result) => {
-    if (err) {
-      console.error(err);
-      res.sendStatus(400);
-    } else {
-      res.send(result);
-    }
-  });
-});
+app.get('/', renderToService);
 
-app.get('*', renderToPage);
+app.get('/proxy/:id', renderToProxy);
 
 if (process.env.DB_ENV === 'postgres') {
   app.listen(port, (err) => {
