@@ -55,6 +55,7 @@ const ENTRANCE = [
 const TYPES = ['Townhouse', 'Villa', 'Apartment', 'Mansion', 'Shack', 'Lean-to', 'Compound', 'Hostel'];
 
 let data = {
+  _id: '',
   listings: TYPES[Math.floor(Math.random() * (TYPES.length))], 
   diningroom: DINING_ROOM[Math.floor(Math.random() * (DINING_ROOM.length))], 
   bedroom: BEDROOM[Math.floor(Math.random() * (BEDROOM.length))], 
@@ -71,12 +72,17 @@ const seed = (count) => {
   
   let csvWriter = createCsvWriter({  
     path: `CSV-Mongo-Holder/out${count}.csv`,
-    header: ['listings', 'diningroom', 'bedroom', 'livingroom', 'patio', 'kitchen', 'bathroom', 'entrance']
+    header: ['_id', 'listings', 'diningroom', 'bedroom', 'livingroom', 'patio', 'kitchen', 'bathroom', 'entrance']
   });
 
   for (let i = 0; i < 1000000; i++) {
     //manipulating the data variable instead of reinstantiating it each loop saves memory
+    let id;
+    if (count < 11) {
+      id = i + (1000000 * (count - 1));
+    }
     data = {
+      _id: id,
       listings: TYPES[Math.floor(Math.random() * (TYPES.length))],
       diningroom: DINING_ROOM[Math.floor(Math.random() * (DINING_ROOM.length))],
       bedroom: BEDROOM[Math.floor(Math.random() * (BEDROOM.length))],
@@ -96,7 +102,7 @@ const seed = (count) => {
     })
     .then(()=> {
       if (count > 10) {
-        console.log('SEEDING COMPLETE');
+        console.log('10 million of 10 million entries created: SEEDING COMPLETE');
         return;
       } else {
         console.log(`${(count - 1)}million of 10 million entries created`);

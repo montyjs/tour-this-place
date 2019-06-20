@@ -31,6 +31,7 @@ if (process.env.DB_ENV === 'postgres') {
 } else if (process.env.DB_ENV === 'mongo') {
 
   let photosSchema = mongoose.Schema({
+    _id: Number,
     listings: String,
     diningroom: String,
     bedroom: String,
@@ -46,9 +47,8 @@ if (process.env.DB_ENV === 'postgres') {
   
 
   let getPhotos = (cb) => {
-    let listings = ['Townhouse', 'Villa', 'Apartment', 'Mansion', 'Shack', 'Lean-to', 'Compound', 'Hostel'];
-    let random = listings[Math.floor(Math.random() * 8)];
-    Photos.find({listings: random}).limit(1).exec((err, docs) => {
+    let random = Math.floor(Math.random() * 1000000);
+    Photos.find({_id: random}).exec((err, docs) => {
       if (err) { throw (err); }
       cb(err, docs[0]);
     });

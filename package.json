@@ -9,7 +9,7 @@
     "react-dev": "webpack -d --watch",
     "build-sql": "psql -d sdc_airbnb -f schema.sql",
     "seed-sql": "export NODE_OPTIONS=--max_old_space_size=8192 && node SDC-database/seed-sql.js",
-    "seed-mongo": "node SDC-database/seed-mongo.js; ./mongo-seed.sh",
+    "seed-mongo": "node SDC-database/seed-mongo.js; ./mongo-aws-seed.sh",
     "seed-aws-mongo": "./mongo-aws-seed.sh"
   },
   "repository": {
