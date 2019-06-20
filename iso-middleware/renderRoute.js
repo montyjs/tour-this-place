@@ -13,7 +13,7 @@ const renderToService = (req, res) => {
       console.error('error', err);
     } else {
       const app = renderToString(<Tour data={result}/>);
-      fs.readFile('/Users/jordan/Documents/Galvanize/SDC/tour-this-place/index.html', (err, result) => {
+      fs.readFile('./index.html', (err, result) => {
         if (err) { throw err; }
         result = result.toString('utf8');
         result = result.replace('<div></div>', app);
@@ -32,7 +32,7 @@ const renderToProxy = (req, res) => {
       console.error('error', err);
     } else {
       const app = renderToString(<Tour data={result}/>);
-      fs.readFile('/Users/jordan/Documents/Galvanize/SDC/tour-this-place/proxy.html', (err, result) => {
+      fs.readFile('./proxy.html', (err, result) => {
         if (err) { throw err; }
         result = result.toString('utf8');
         result = result.replace('<div></div>', app);
