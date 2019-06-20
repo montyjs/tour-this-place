@@ -6,7 +6,7 @@ import Tour from '../shared/components/Tour';
 const renderRouter = Component => {
   ReactDOM.hydrate(
     <Component />,
-    document.getElementById('root')
+    document.getElementById('tour')
   );
 };
 renderRouter(Tour);
