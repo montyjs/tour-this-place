@@ -26,8 +26,8 @@ const renderToService = (req, res) => {
 };
 
 const renderToProxy = (req, res) => {
-  console.log('req.param.id', req.param.id);
-  db.getPhotos((err, result) => {
+  
+  db.getPhotos(Number(req.params.id), (err, result) => {
     if (err) {
       console.error('error', err);
     } else {
@@ -37,8 +37,8 @@ const renderToProxy = (req, res) => {
         result = result.toString('utf8');
         result = result.replace('<div></div>', app);
         result = result.replace('<style></style>', styles);
-        return res.send(`<!DOCTYPE html>${result}`);
-      }, req.param.id);
+        return res.send(result);
+      });
       //if req.url === url/proxy then use proxy HTML template
     }
   });  

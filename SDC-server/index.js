@@ -18,9 +18,9 @@ const buildPath = path.join(__dirname, '../', 'build');
 app.use(express.static(buildPath));
 app.use(express.static(__dirname));
 
-app.get('/', renderToService);
-
 app.get('/proxy/:id', renderToProxy);
+
+app.get('/', renderToService);
 
 if (process.env.DB_ENV === 'postgres') {
   app.listen(port, (err) => {
