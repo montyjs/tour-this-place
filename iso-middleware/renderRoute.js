@@ -8,7 +8,7 @@ import styles from '../shared/styles';
 
 const renderToService = (req, res) => {
 
-  db.getPhotos(-1, (err, result) => {
+  db.getPhotos('service', (err, result) => {
     if (err) {
       console.error('error', err);
     } else {
@@ -20,13 +20,12 @@ const renderToService = (req, res) => {
         result = result.replace('<style></style>', styles);
         return res.send(`<!DOCTYPE html>${result}`);
       });
-      //if req.url === url/proxy then use proxy HTML template
     }
   });
 };
 
 const renderToProxy = (req, res) => {
-  
+
   db.getPhotos(Number(req.params.id), (err, result) => {
     if (err) {
       console.error('error', err);
@@ -39,7 +38,6 @@ const renderToProxy = (req, res) => {
         result = result.replace('<style></style>', styles);
         return res.send(result);
       });
-      //if req.url === url/proxy then use proxy HTML template
     }
   });  
 };

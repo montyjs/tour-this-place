@@ -47,7 +47,7 @@ if (process.env.DB_ENV === 'postgres') {
   
 
   let getPhotos = (target, cb) => {
-    if (target >= -1) {
+    if (target === 'service') {
       let random = Math.floor(Math.random() * 10000001);
       Photos.find({_id: random}).exec((err, docs) => {
         if (err) { cb(err); }
