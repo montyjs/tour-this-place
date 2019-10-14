@@ -1,7 +1,7 @@
-# System Design Capstone
+# CloudBnB-Service
 
 
-> This was made during my time at Hack Reactor. It is a UI clone of a AirBnb built by a group of peers in my class. I rebuilt the database, server and adapted the client to handle a database of 10 million entries.  
+> This was made during my time at Hack Reactor. It is a UI clone of a AirBnb built by a group of peers in my class. I rebuilt the database, server and adapted the client to handle 5,000 requests per second to a database of 10 million entries. I deployed it to an AWS EC2 instance.
 
 ## Related Projects
 
